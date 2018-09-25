@@ -13,8 +13,3 @@ chown ${MINDUSTRY_USER}:${MINDUSTRY_GROUP} -R ${MINDUSTRY_HOME}
 
 # become non-elevated user and run host in tmux
 su ${MINDUSTRY_USER} bash -c "tmux new-session -s ${TMUX_SESSION} '${SERVER_CMD}'"
-
-# make pipe file for docker logs (may solve issues showing raw tmux output)
-su ${MINDUSTRY_USER} bash -c "mkfifo /tmp/tmuxpipe"
-su ${MINDUSTRY_USER} bash -c "tmux pipe-pane -o -t ${TMUX_SESSION} 'cat >> /tmp/tmuxpipe'"
-cat /tmp/tmuxpipe
