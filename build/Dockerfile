@@ -22,9 +22,11 @@ VOLUME      $MINDUSTRY_HOME/.mindustry
 
 WORKDIR     $MINDUSTRY_HOME
 
-COPY        .tmux.conf .
+COPY        ./.tmux.conf .
+
+COPY        ./console.sh /usr/local/bin/console
 
 COPY        ./docker-entrypoint.sh /
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["default"]
+CMD ["host"]
