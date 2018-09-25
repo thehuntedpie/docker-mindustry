@@ -1,11 +1,12 @@
 #!/bin/bash -x
+SERVER_ARGS=$1
 
 MINDUSTRY_USER=mindustry
 MINDUSTRY_GROUP=$(su $MINDUSTRY_USER 'id -g')
 MINDUSTRY_HOME=$(su $MINDUSTRY_USER 'echo $HOME')
 
 # define server command
-SERVER_CMD='java -jar /usr/local/share/mindustry/server.jar host'
+SERVER_CMD='java -jar /usr/local/share/mindustry/server.jar '"${SERVER_ARGS}"
 TMUX_SESSION=Mindustry
 
 # change ownership of home directory
