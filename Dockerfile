@@ -9,15 +9,18 @@ RUN         apk add --update --no-cache curl ca-certificates openssl git tar bas
 RUN         apk add --update --no-cache curl ca-certificates sqlite
 RUN         apk add --update --no-cache curl ca-certificates tmux
 
-RUN         adduser -D -h /var/lib/mindustry mindustry
+ENV         MINDUSTRY_USER mindustry
+ENV         MINDUSTRY_HOME /var/lib/mindustry
+
+RUN         adduser -D -h $MINDUSTRY_HOME $MINDUSTRY_USER
 
 COPY        Mindustry-server-4.0-alpha-56.jar /usr/local/share/mindustry/server.jar
 
 USER        root
 
-VOLUME      /var/lib/mindustry/.mindustry
+VOLUME      $MINDUSTRY_HOME/.mindustry
 
-WORKDIR     /var/lib/mindustry
+WORKDIR     $MINDUSTRY_HOME
 
 COPY        .tmux.conf .
 
